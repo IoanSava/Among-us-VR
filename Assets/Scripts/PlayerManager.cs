@@ -12,13 +12,18 @@ public class PlayerManager : MonoBehaviourPunCallbacks//, IPunObservable
     void Start()
     {
         CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
-
+        Debug.Log("PM start");
 
         if (_cameraWork != null)
         {
             if (photonView.IsMine)
             {
+                Debug.Log("Started following the player");
                 _cameraWork.OnStartFollowing();
+            }
+            else
+            {
+                Debug.Log("Not my camera");
             }
         }
         else

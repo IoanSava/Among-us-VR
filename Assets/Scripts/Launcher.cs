@@ -85,10 +85,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             // Load the Room Level.
             //PhotonNetwork.LoadLevel("AmongUsVR");
         }
-        else
-        {
-            Com.MyCompany.MyGame.GameManager gm = Com.MyCompany.MyGame.GameManager.gm;
-            gm.StartMethod();
-        }
+
+        Com.MyCompany.MyGame.GameManager.gm.StartMethod();
     }
 }

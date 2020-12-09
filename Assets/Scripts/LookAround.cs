@@ -5,7 +5,7 @@ using Photon.Pun;
 public class LookAround : MonoBehaviourPun
 {
     [SerializeField] float headRotationLimit = 90f;
-    [SerializeField] Transform cam;
+    Transform cam;
     [SerializeField] float sensitivity;
     float headRotation = 0f;
 
@@ -13,11 +13,12 @@ public class LookAround : MonoBehaviourPun
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+		cam = Camera.main.transform;
     }
 
     void Update()
     {
-		if (photonView.IsMine == true && PhotonNetwork.IsConnected == true) 
+		if (cam != null && photonView.IsMine == true && PhotonNetwork.IsConnected == true) 
 		{
         	float x = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         	float y = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime * -1f;
