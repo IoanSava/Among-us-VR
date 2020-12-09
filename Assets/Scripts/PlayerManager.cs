@@ -11,20 +11,20 @@ public class PlayerManager : MonoBehaviourPunCallbacks//, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
-        // CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
+        CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
 
 
-        // if (_cameraWork != null)
-        // {
-        //     if (photonView.IsMine)
-        //     {
-        //         _cameraWork.OnStartFollowing();
-        //     }
-        // }
-        // else
-        // {
-        //     Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
-        // }
+        if (_cameraWork != null)
+        {
+            if (photonView.IsMine)
+            {
+                _cameraWork.OnStartFollowing();
+            }
+        }
+        else
+        {
+            Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+        }
         #if UNITY_5_4_OR_NEWER
         // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
