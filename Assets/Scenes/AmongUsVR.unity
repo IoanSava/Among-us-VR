@@ -9568,78 +9568,78 @@ Rigidbody:
   m_CollisionDetection: 0
 --- !u!1 &919132148400551741 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1810672980864088901, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+  m_CorrespondingSourceObject: {fileID: 2562278851493963642, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
     type: 3}
-  m_PrefabInstance: {fileID: 1576722395207781496}
+  m_PrefabInstance: {fileID: 3408770662880596039}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1576722395207781496
+--- !u!1001 &3408770662880596039
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1327187324689015295, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963521, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -143.73169
       objectReference: {fileID: 0}
-    - target: {fileID: 1327187324689015295, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963521, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 4.3
       objectReference: {fileID: 0}
-    - target: {fileID: 1327187324689015295, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963521, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -5.5692444
       objectReference: {fileID: 0}
-    - target: {fileID: 1327187324689015295, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963521, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1327187324689015295, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963521, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1327187324689015295, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963521, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1327187324689015295, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963521, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1327187324689015295, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963521, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1327187324689015295, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963521, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1327187324689015295, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963521, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1327187324689015295, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963521, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1576722396752492508, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963526, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: viewIdField
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1810672980864088901, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
+    - target: {fileID: 2562278851493963642, guid: cd2c6408fe2024d44ac9ad63a1ea24cc,
         type: 3}
       propertyPath: m_Name
       value: AmongUsCharacter
