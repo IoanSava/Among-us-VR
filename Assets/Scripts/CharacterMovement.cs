@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 
-public class CharacterMovement : MonoBehaviour
+public class CharacterMovement : MonoBehaviourPun
 {
     Rigidbody rigidBody;
     [SerializeField] float speed;
@@ -12,6 +13,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
+<<<<<<< HEAD
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 <<<<<<< HEAD
@@ -32,5 +34,22 @@ public class CharacterMovement : MonoBehaviour
         {
             GetComponent<Animator>().SetBool("isMoving", false);
         }
+=======
+		if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
+        	float x = Input.GetAxisRaw("Horizontal");
+        	float z = Input.GetAxisRaw("Vertical");
+        	Vector3 moveBy = transform.right * x + transform.forward * z;
+        	rigidBody.MovePosition(transform.position + moveBy.normalized * speed * Time.deltaTime);
+
+ 	       if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Horizontal") > 0)
+     	   {
+      	      GetComponent<Animator>().SetBool("isMoving", true);
+      	  	}
+      	  	else
+       	 	{
+            	GetComponent<Animator>().SetBool("isMoving", false);
+        	}
+		}
+>>>>>>> 42b2f74... added photonview
     }
 }
