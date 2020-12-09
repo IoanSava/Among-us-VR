@@ -1,9 +1,13 @@
 fileFormatVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 guid: 09952104a8541f44081d2bdb50a3d145
 =======
 guid: f65a6d514abf47443ad2f8a18cd05a25
 >>>>>>> 2dc2b5b... added Game Manager& Launcher
+=======
+guid: 09952104a8541f44081d2bdb50a3d145
+>>>>>>> 871a754... merged with character_movements
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
