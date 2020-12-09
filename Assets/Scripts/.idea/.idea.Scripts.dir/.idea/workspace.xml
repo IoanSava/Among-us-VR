@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="feb76502-fc3c-4b19-9eae-9cd500ee2871" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Resources/AmongUsCharacter.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Resources/AmongUsCharacter.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scenes/AmongUsVR.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/AmongUsVR.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Scripts.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Scripts.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Launcher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Launcher.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LookAround.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LookAround.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlayerManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CameraWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CameraWork.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,11 +30,11 @@
         <option value="$PROJECT_DIR$/SmoothMouseLook.cs" />
         <option value="$PROJECT_DIR$/CameraWorks.cs" />
         <option value="$PROJECT_DIR$/CharacterMovement.cs" />
-        <option value="$PROJECT_DIR$/CameraWork.cs" />
         <option value="$PROJECT_DIR$/PlayerManager.cs" />
         <option value="$PROJECT_DIR$/GameManager.cs" />
         <option value="$PROJECT_DIR$/Launcher.cs" />
         <option value="$PROJECT_DIR$/LookAround.cs" />
+        <option value="$PROJECT_DIR$/CameraWork.cs" />
       </list>
     </option>
   </component>
@@ -64,7 +61,7 @@
       <workItem from="1607458629700" duration="618000" />
       <workItem from="1607502046802" duration="861000" />
       <workItem from="1607515451409" duration="513000" />
-      <workItem from="1607517591475" duration="8799000" />
+      <workItem from="1607517591475" duration="10348000" />
     </task>
     <servers />
   </component>
