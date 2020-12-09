@@ -84,7 +84,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         
             // #Critical
             // Load the Room Level.
-            PhotonNetwork.LoadLevel("AmongUsVR");
+            //PhotonNetwork.LoadLevel("AmongUsVR");
         }
     }
 }
