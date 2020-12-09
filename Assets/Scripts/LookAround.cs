@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 
-public class LookAround : MonoBehaviour
+
+public class LookAround : MonoBehaviourPun
 {
     [SerializeField] float headRotationLimit = 90f;
     [SerializeField] Transform cam;
@@ -15,11 +17,14 @@ public class LookAround : MonoBehaviour
 
     void Update()
     {
-        float x = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        float y = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime * -1f;
-        transform.Rotate(0f, x, 0f);
-        headRotation += y;
-        headRotation = Mathf.Clamp(headRotation, -headRotationLimit, headRotationLimit);
-        cam.localEulerAngles = new Vector3(headRotation, cam.localEulerAngles.y, cam.localEulerAngles.z);
+		if (photonView.IsMine == true && PhotonNetwork.IsConnected == true) 
+		{
+        	float x = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+        	float y = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime * -1f;
+        	transform.Rotate(0f, x, 0f);
+        	headRotation += y;
+        	headRotation = Mathf.Clamp(headRotation, -headRotationLimit, headRotationLimit);
+        	cam.localEulerAngles = new Vector3(headRotation, cam.localEulerAngles.y, cam.localEulerAngles.z);
+		}
     }
 }
