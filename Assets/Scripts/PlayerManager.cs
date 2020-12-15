@@ -2,37 +2,59 @@
 using Photon.Pun.Demo.PunBasics;
 using System;
 using UnityEngine;
+using VRTK;
 
 public class PlayerManager : MonoBehaviourPunCallbacks//, IPunObservable
 {
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
+    
+
+//     void Start()
+//     {
+//         CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
+//         Debug.Log("PM start");
+//
+//         if (_cameraWork != null)
+//         {
+//             if (photonView.IsMine)
+//             {
+//                 Debug.Log("Started following the player");
+//                 _cameraWork.OnStartFollowing();
+//             }
+//             else
+//             {
+//                 Debug.Log("Not my camera");
+//             }
+//         }
+//         else
+//         {
+//             Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+//         }
+// #if UNITY_5_4_OR_NEWER
+//         // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
+//         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+// #endif
+//     }
 
     void Start()
     {
-        CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
-        Debug.Log("PM start");
-
-        if (_cameraWork != null)
+        if (photonView.IsMine)
         {
-            if (photonView.IsMine)
-            {
-                Debug.Log("Started following the player");
-                _cameraWork.OnStartFollowing();
-            }
+            CameraWork cameraWork = gameObject.GetComponentInChildren<CameraWork>();
+            cameraWork.OnStartFollowing();
+            var vrtkInputSimulator = transform.GetChild(0).GetComponent(typeof(SDK_InputSimulator)) as SDK_InputSimulator;
+            if (vrtkInputSimulator == null)
+                Debug.LogError("No SDK_InputSimulator found on player");
             else
             {
-                Debug.Log("Not my camera");
+                Debug.Log("Enabling SDK_InputSimulator");
+                vrtkInputSimulator.enabled = true;
             }
-        }
-        else
-        {
-            Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
-        }
-#if UNITY_5_4_OR_NEWER
-        // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
-#endif
+        } 
+        else 
+            Debug.Log("Not my camera"); 
+            
     }
 
     void Awake()
