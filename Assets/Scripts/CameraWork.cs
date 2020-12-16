@@ -30,26 +30,12 @@ namespace Photon.Pun.Demo.PunBasics
         [Tooltip("The height we want the camera to be above the target")]
         [SerializeField]
         private float height = 3.0f;
-
-
-        [Tooltip("Allow the camera to be offseted vertically from the target, for example giving more view of the sceneray and less ground.")]
-        [SerializeField]
-        private Vector3 centerOffset = Vector3.zero;
-
-
-        [Tooltip("Set this as false if a component of a prefab being instanciated by Photon Network, and manually call OnStartFollowing() when and if needed.")]
-        [SerializeField]
-        private bool followOnStart = false;
-
-
-        [Tooltip("The Smoothing for the camera to follow the target")]
-        [SerializeField]
-        private float smoothSpeed = 0.125f;
+        
 
 
         // cached transform of the target
         Transform cameraTransform;
-
+        private Transform neckTransform;
 
         // maintain a flag internally to reconnect if target is lost or camera is switched
         bool isFollowing;
@@ -60,24 +46,9 @@ namespace Photon.Pun.Demo.PunBasics
 
 
         #endregion
-
-
+        
         #region MonoBehaviour Callbacks
-
-
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity during initialization phase
-        /// </summary>
-        void Start()
-        {
-            // Start following the target if wanted.
-            if (followOnStart)
-            {
-                OnStartFollowing();
-            }
-        }
-
-
+        
         void LateUpdate()
         {
             // The transform target may not destroy on level load,
@@ -110,8 +81,7 @@ namespace Photon.Pun.Demo.PunBasics
         {
             cameraTransform = Camera.main.transform;
             isFollowing = true;
-            // we don't smooth anything, we go straight to the right camera shot
-            Cut();
+            Follow();
         }
 
 
@@ -128,26 +98,11 @@ namespace Photon.Pun.Demo.PunBasics
         {
             cameraOffset.z = -distance;
             cameraOffset.y = height;
-
-
-            cameraTransform.position = this.transform.position + this.transform.TransformVector(cameraOffset);
-
-
-            cameraTransform.rotation = this.transform.rotation * Quaternion.Euler(0, -90, 0);
+            
+            cameraTransform.position = transform.position + transform.TransformVector(cameraOffset);
+            cameraTransform.rotation = transform.rotation;
         }
-
-
-        void Cut()
-        {
-            cameraOffset.z = -distance;
-            cameraOffset.y = height;
-
-
-            cameraTransform.position = this.transform.position + this.transform.TransformVector(cameraOffset);
-
-
-            // cameraTransform.LookAt(this.transform.position + centerOffset);
-        }
+        
         #endregion
     }
 }

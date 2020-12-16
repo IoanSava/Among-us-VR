@@ -1,45 +1,60 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Photon.Pun;
+﻿using Photon.Pun;
 using Photon.Pun.Demo.PunBasics;
+using System;
+using UnityEngine;
+using VRTK;
 
 public class PlayerManager : MonoBehaviourPunCallbacks//, IPunObservable
 {
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
-    // Start is called before the first frame update
+    
+
+//     void Start()
+//     {
+//         CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
+//         Debug.Log("PM start");
+//
+//         if (_cameraWork != null)
+//         {
+//             if (photonView.IsMine)
+//             {
+//                 Debug.Log("Started following the player");
+//                 _cameraWork.OnStartFollowing();
+//             }
+//             else
+//             {
+//                 Debug.Log("Not my camera");
+//             }
+//         }
+//         else
+//         {
+//             Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+//         }
+// #if UNITY_5_4_OR_NEWER
+//         // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
+//         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+// #endif
+//     }
+
     void Start()
     {
-        CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
-        Debug.Log("PM start");
-
-        if (_cameraWork != null)
+        if (photonView.IsMine)
         {
-            if (photonView.IsMine)
-            {
-                Debug.Log("Started following the player");
-                _cameraWork.OnStartFollowing();
-            }
+            CameraWork cameraWork = gameObject.GetComponentInChildren<CameraWork>();
+            cameraWork.OnStartFollowing();
+            var vrtkInputSimulator = transform.GetChild(0).GetComponent(typeof(SDK_InputSimulator)) as SDK_InputSimulator;
+            if (vrtkInputSimulator == null)
+                Debug.LogError("No SDK_InputSimulator found on player");
             else
             {
-                Debug.Log("Not my camera");
+                Debug.Log("Enabling SDK_InputSimulator");
+                vrtkInputSimulator.enabled = true;
             }
-        }
-        else
-        {
-            Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
-        }
-        #if UNITY_5_4_OR_NEWER
-        // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
-        #endif
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        } 
+        else 
+            Debug.Log("Not my camera"); 
+            
     }
 
     void Awake()
@@ -48,29 +63,29 @@ public class PlayerManager : MonoBehaviourPunCallbacks//, IPunObservable
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
         if (photonView.IsMine)
         {
-            PlayerManager.LocalPlayerInstance = this.gameObject;
+            LocalPlayerInstance = gameObject;
         }
         // #Critical
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
-    #if UNITY_5_4_OR_NEWER
+#if UNITY_5_4_OR_NEWER
     public override void OnDisable()
     {
         // Always call the base to remove callbacks
         base.OnDisable();
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    #endif
+#endif
 
-    #if !UNITY_5_4_OR_NEWER
+#if !UNITY_5_4_OR_NEWER
     /// <summary>See CalledOnLevelWasLoaded. Outdated in Unity 5.4.</summary>
     void OnLevelWasLoaded(int level)
     {
         this.CalledOnLevelWasLoaded(level);
     }
-    #endif
+#endif
 
     void CalledOnLevelWasLoaded(int level)
     {
@@ -81,26 +96,26 @@ public class PlayerManager : MonoBehaviourPunCallbacks//, IPunObservable
         }
     }
 
-    #if UNITY_5_4_OR_NEWER
+#if UNITY_5_4_OR_NEWER
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
     {
-        this.CalledOnLevelWasLoaded(scene.buildIndex);
+        CalledOnLevelWasLoaded(scene.buildIndex);
     }
-    #endif
+#endif
 
-   /*#region IPunObservable implementation
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            // We own this player: send the others our data
-            stream.SendNext(IsFiring);
-        }
-        else
-        {
-            // Network player, receive data
-            this.IsFiring = (bool)stream.ReceiveNext();
-        }
-    }
-    #endregion*/
+    /*#region IPunObservable implementation
+     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+     {
+         if (stream.IsWriting)
+         {
+             // We own this player: send the others our data
+             stream.SendNext(IsFiring);
+         }
+         else
+         {
+             // Network player, receive data
+             this.IsFiring = (bool)stream.ReceiveNext();
+         }
+     }
+     #endregion*/
 }

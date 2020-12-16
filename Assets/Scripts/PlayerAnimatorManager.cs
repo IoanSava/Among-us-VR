@@ -1,22 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Photon.Pun;
 using UnityEngine;
-using Photon.Pun;
 
 public class PlayerAnimatorManager : MonoBehaviourPun
 {
-    // Start is called before the first frame update
-    void Start()
+    private Animator Animator;
+
+    private void Start()
     {
-        
+        Animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+        if (photonView.IsMine == true && PhotonNetwork.IsConnected == true)
         {
-            return;
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+            if (x != 0 || y != 0)
+            {
+                Animator.SetBool("isMoving", true);
+            }
+            else
+            {
+                Animator.SetBool("isMoving", false);
+            }
         }
     }
 }
+

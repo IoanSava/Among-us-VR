@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections;
-
-
+﻿using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-
-using Photon.Pun;
-using Photon.Realtime;
+using System;
 
 
 namespace Com.MyCompany.MyGame
 {
     public class GameManager : MonoBehaviourPunCallbacks
     {
-		#region Public Properties
-		[Tooltip("The prefab to use for representing the player")]
-		public GameObject playerPrefab;
-		public static GameManager gm;
-		#endregion
+        #region Public Properties
+        [Tooltip("The prefab to use for representing the player")]
+        public GameObject playerPrefab;
+        public static GameManager gm;
+        public const int NumberOfSpawnPoints = 5;
+        #endregion
 
         #region Photon Callbacks
 
@@ -34,42 +30,47 @@ namespace Com.MyCompany.MyGame
 
         #endregion
 
-
         #region Public Methods
 
-		public void Start() {
-			gm = this;
-		}
+        public void Start()
+        {
+            gm = this;
+        }
 
-		public void StartMethod()
-		{
-			if (playerPrefab == null)
-			{
-    			Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'",this);
-			}
-			else
-				{
-					if (PlayerManager.LocalPlayerInstance == null)
-					{
-    					Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
-		    			// we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-    					PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
-					}
-					else
-					{
-    					Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
-					}
-    			}
-		}
+        private Transform GetSpawnPoint()
+        {
+            System.Random random = new System.Random();
+            return GameController.instance.spawnPoints[random.Next(NumberOfSpawnPoints)];
+        }
 
+        public void StartMethod()
+        {
+            if (playerPrefab == null)
+            {
+                Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
+            }
+            else
+            {
+                if (PlayerManager.LocalPlayerInstance == null)
+                {
+                    Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
+                    Transform spawnPoint = GetSpawnPoint();
+                    PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, Quaternion.identity, 0);
+                }
+                else
+                {
+                    Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+                }
+            }
+        }
 
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
         }
-        
+
         #endregion
-        
+
         #region Photon Callbacks
 
 
@@ -77,11 +78,10 @@ namespace Com.MyCompany.MyGame
         {
             Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
 
-
             if (PhotonNetwork.IsMasterClient)
             {
                 Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-                
+
             }
         }
 
@@ -89,7 +89,6 @@ namespace Com.MyCompany.MyGame
         public override void OnPlayerLeftRoom(Player other)
         {
             Debug.LogFormat("OnPlayerLeftRoom() {0}", other.NickName); // seen when other disconnects
-
 
             if (PhotonNetwork.IsMasterClient)
             {
