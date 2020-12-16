@@ -1,17 +1,30 @@
 ﻿using Photon.Pun;
+using UnityEngine;
 
 public class PlayerAnimatorManager : MonoBehaviourPun
 {
-    void Start()
-    {
+    private Animator Animator;
 
+    private void Start()
+    {
+        Animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+        if (photonView.IsMine == true && PhotonNetwork.IsConnected == true)
         {
-            return;
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+            if (x != 0 || y != 0)
+            {
+                Animator.SetBool("isMoving", true);
+            }
+            else
+            {
+                Animator.SetBool("isMoving", false);
+            }
         }
     }
 }
+

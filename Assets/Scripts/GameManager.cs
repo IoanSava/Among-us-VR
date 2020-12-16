@@ -2,6 +2,7 @@
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 
 namespace Com.MyCompany.MyGame
@@ -12,6 +13,7 @@ namespace Com.MyCompany.MyGame
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
         public static GameManager gm;
+        public const int NumberOfSpawnPoints = 5;
         #endregion
 
         #region Photon Callbacks
@@ -37,7 +39,8 @@ namespace Com.MyCompany.MyGame
 
         private Transform GetSpawnPoint()
         {
-            return GameController.instance.spawnPoints[PhotonNetwork.CountOfPlayers - 1];
+            System.Random random = new System.Random();
+            return GameController.instance.spawnPoints[random.Next(NumberOfSpawnPoints)];
         }
 
         public void StartMethod()
