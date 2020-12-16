@@ -4,38 +4,10 @@ using System;
 using UnityEngine;
 using VRTK;
 
-public class PlayerManager : MonoBehaviourPunCallbacks//, IPunObservable
+public class PlayerManager : MonoBehaviourPunCallbacks
 {
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
-    
-
-//     void Start()
-//     {
-//         CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
-//         Debug.Log("PM start");
-//
-//         if (_cameraWork != null)
-//         {
-//             if (photonView.IsMine)
-//             {
-//                 Debug.Log("Started following the player");
-//                 _cameraWork.OnStartFollowing();
-//             }
-//             else
-//             {
-//                 Debug.Log("Not my camera");
-//             }
-//         }
-//         else
-//         {
-//             Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
-//         }
-// #if UNITY_5_4_OR_NEWER
-//         // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
-//         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
-// #endif
-//     }
 
     void Start()
     {
@@ -102,20 +74,4 @@ public class PlayerManager : MonoBehaviourPunCallbacks//, IPunObservable
         CalledOnLevelWasLoaded(scene.buildIndex);
     }
 #endif
-
-    /*#region IPunObservable implementation
-     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-     {
-         if (stream.IsWriting)
-         {
-             // We own this player: send the others our data
-             stream.SendNext(IsFiring);
-         }
-         else
-         {
-             // Network player, receive data
-             this.IsFiring = (bool)stream.ReceiveNext();
-         }
-     }
-     #endregion*/
 }

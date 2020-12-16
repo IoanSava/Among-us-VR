@@ -2,7 +2,6 @@
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
 
 
 namespace Com.MyCompany.MyGame
