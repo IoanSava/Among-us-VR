@@ -73,11 +73,11 @@ namespace Com.MyCompany.MyGame
         public override void OnPlayerEnteredRoom(Player other)
         {
             Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
+            // PhotonVoiceNetwork.Instance.Client.OpChangeGroups(new byte[0], BitConverter.GetBytes(int.Parse(PhotonNetwork.CurrentRoom.Name)));
 
             if (PhotonNetwork.IsMasterClient)
             {
                 Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-
             }
         }
 

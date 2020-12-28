@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/NewChar.meta
+guid: 3d7427b6088c346d8846c715d8f343b8
+folderAsset: yes
+DefaultImporter:
+=======
+guid: d0168cea74bd131418773be4af59b634
+PrefabImporter:
+>>>>>>> 125b7ea (feat:fixed room creation and joining):Assets/Scripts/Prefabs/PlayerUI.prefab.meta
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

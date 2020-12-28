@@ -82,7 +82,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.CreateRoom(roomId.ToString(), new RoomOptions { MaxPlayers = maxPlayersPerRoom });
             Debug.Log($"Room with id {roomId} created");
-            PhotonVoiceNetwork.Instance.Client.OpChangeGroups(new byte[0], BitConverter.GetBytes(roomId));
+            //PhotonVoiceNetwork.Instance.Client.OpChangeGroups(new byte[0], BitConverter.GetBytes(roomId));
             ++roomId;
         }
         else
