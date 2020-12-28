@@ -1,8 +1,41 @@
 fileFormatVersion: 2
-guid: b873b81dc7b941a4bb6c5216c918b66d
+guid: c9a0bdd83e5ea4192bec480aa272419c
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
+  - first:
+      74: -5170430113383847120
+    second: Character|Death
+  - first:
+      74: 6780978956443316875
+    second: Character|Death.001
+  - first:
+      74: -320802180276110876
+    second: Character|Death.002
+  - first:
+      74: 2125660960497822414
+    second: Character|Death.003
+  - first:
+      74: 7161857318672801155
+    second: Character|Killing
+  - first:
+      74: 1311792941617155935
+    second: Character|Killing.001
+  - first:
+      74: -7429058575322047643
+    second: Character|Killing.002
+  - first:
+      74: -6545952804368145252
+    second: Character|Running
+  - first:
+      74: -1572157837001608233
+    second: Character|Running.001
+  - first:
+      74: 409723101362379125
+    second: Character|Running.002
+  - first:
+      74: 5790093844095920721
+    second: Character|Running.003
   - first:
       74: -982115091633673366
     second: Armature|Death
