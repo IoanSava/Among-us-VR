@@ -31,18 +31,13 @@ namespace Com.MyCompany.MyGame
 
         #region Public Methods
 
-        public void Start()
-        {
-            gm = this;
-        }
-
         private Transform GetSpawnPoint()
         {
             System.Random random = new System.Random();
             return GameController.instance.spawnPoints[random.Next(NumberOfSpawnPoints)];
         }
 
-        public void StartMethod()
+        public void Start()
         {
             if (playerPrefab == null)
             {
@@ -72,7 +67,7 @@ namespace Com.MyCompany.MyGame
 
         #region Photon Callbacks
 
-
+        // here we set nicknames, player model color
         public override void OnPlayerEnteredRoom(Player other)
         {
             Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting

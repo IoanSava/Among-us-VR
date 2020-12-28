@@ -1432,6 +1432,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftHand
       objectReference: {fileID: 0}
+    - target: {fileID: 1235595987641076206, guid: 8f824f93b84be964c8af10c70bd33fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1238506205821165834, guid: 8f824f93b84be964c8af10c70bd33fc0,
         type: 3}
       propertyPath: m_LocalPosition.x

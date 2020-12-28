@@ -5,7 +5,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public Transform[] spawnPoints;
 
-    void Start()
+    void Awake()
     {
         instance = this;
     }
