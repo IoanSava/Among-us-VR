@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
-    string gameVersion = "1";
+    string gameVersion = "2";
 
     [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
     [SerializeField]

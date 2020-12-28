@@ -1,28 +1,34 @@
 ﻿using Photon.Pun;
-using Photon.Pun.Demo.PunBasics;
-using System;
 using UnityEngine;
-using VRTK;
+using VRTK.Examples.Archery;
 
 public class PlayerManager : MonoBehaviourPunCallbacks
 {
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
 
-    private void AttachToVRTK()
+    private void AttachVRTK()
     {
         Vector3 currentPosition = transform.position;
-        GameObject vrtkRig = GameObject.Find("[VRSimulator_CameraRig]");
-        transform.SetParent(vrtkRig.transform, false);
-        vrtkRig.transform.position = currentPosition;
-        Debug.Log("Attached player prefab to camera rig");
+        GameObject cameraRig = GameObject.Find("[VRSimulator_CameraRig]");
+        cameraRig.transform.position = currentPosition;
+
+        var boxCollider = gameObject.GetComponent<BoxCollider>();
+        var newBoxCollider = cameraRig.AddComponent<BoxCollider>();
+        newBoxCollider.center = boxCollider.center;
+        newBoxCollider.size = boxCollider.size;
+        Destroy(boxCollider);
+        
+        var followComponent = gameObject.GetComponent<Follow>();
+        followComponent.enabled = true;
+        followComponent.target = cameraRig.transform;
     }
 
     void Start()
     {
         if (photonView.IsMine)
         {
-            AttachToVRTK();
+            AttachVRTK();
         } 
         else 
             Debug.Log("Not my camera"); 
