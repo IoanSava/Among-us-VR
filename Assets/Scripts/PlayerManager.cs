@@ -9,20 +9,20 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
 
+    private void AttachToVRTK()
+    {
+        Vector3 currentPosition = transform.position;
+        GameObject vrtkRig = GameObject.Find("[VRSimulator_CameraRig]");
+        transform.SetParent(vrtkRig.transform, false);
+        vrtkRig.transform.position = currentPosition;
+        Debug.Log("Attached player prefab to camera rig");
+    }
+
     void Start()
     {
         if (photonView.IsMine)
         {
-            CameraWork cameraWork = gameObject.GetComponentInChildren<CameraWork>();
-            cameraWork.OnStartFollowing();
-            var vrtkInputSimulator = transform.GetChild(0).GetComponent(typeof(SDK_InputSimulator)) as SDK_InputSimulator;
-            if (vrtkInputSimulator == null)
-                Debug.LogError("No SDK_InputSimulator found on player");
-            else
-            {
-                Debug.Log("Enabling SDK_InputSimulator");
-                vrtkInputSimulator.enabled = true;
-            }
+            AttachToVRTK();
         } 
         else 
             Debug.Log("Not my camera"); 
