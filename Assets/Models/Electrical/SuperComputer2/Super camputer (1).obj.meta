@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: c29318310df044a458a8935f7c85c03d
+guid: ca6166b84cf326440ade04392a06995f
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Super_camputerMat
+    second: {fileID: 2100000, guid: 557adf822a6c49c45ac2178674a0b3ec, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
