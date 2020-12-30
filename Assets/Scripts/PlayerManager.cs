@@ -1,9 +1,7 @@
+using Photon.Pun;
 using System;
-﻿using Photon.Pun;
-using Photon.Pun.Demo.PunBasics;
 using UnityEngine;
 using VRTK;
-using VRTK.Examples.Archery;
 
 public class PlayerManager : MonoBehaviourPunCallbacks
 {
@@ -15,15 +13,15 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         GameObject cameraRig = GameObject.Find("[VRSimulator_CameraRig]");
         GameObject vrtkScripts = GameObject.Find("[VRTK_Scripts]");
         VRTK_BodyPhysics bodyPhysics = vrtkScripts.GetComponent<VRTK_BodyPhysics>();
-        
+
         bodyPhysics.customPlayAreaRigidbody = gameObject.GetComponent<Rigidbody>();
         bodyPhysics.customBodyColliderContainer = GameObject.Find("BodyColider");
         gameObject.GetComponent<BoxCollider>().enabled = false;
-        
+
         VRTK_TransformFollow follow = gameObject.AddComponent<VRTK_TransformFollow>();
         cameraRig.transform.position = transform.position;
         cameraRig.transform.rotation = transform.rotation;
-        
+
         // TODO: fix jitter 
         follow.gameObjectToFollow = cameraRig;
         follow.gameObjectToChange = gameObject;
@@ -35,7 +33,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
         transform.Find("Cube").GetComponent<Renderer>().enabled = false;
     }
-    
+
     [Tooltip("The Player's UI GameObject Prefab")]
     public GameObject PlayerUiPrefab;
 
@@ -54,11 +52,11 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             AttachVRTK();
-        } 
+        }
         else
-	{
-            Debug.Log("Not my camera"); 
-	}
+        {
+            Debug.Log("Not my camera");
+        }
     }
 
     void Awake()

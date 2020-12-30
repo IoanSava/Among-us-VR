@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using Photon.Pun;
-using Photon.Realtime;
+﻿using Photon.Pun;
 using TMPro;
+using UnityEngine;
 
 
 namespace Com.MyCompany.MyGame
@@ -63,7 +59,8 @@ namespace Com.MyCompany.MyGame
             // #Important
             if (string.IsNullOrEmpty(value))
             {
-                Debug.LogError("Player Name is null or empty");
+                Debug.Log("Player Name is null or empty");
+                PhotonNetwork.NickName = "PlayerName";
                 return;
             }
             PhotonNetwork.NickName = value;
