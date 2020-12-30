@@ -12,7 +12,6 @@ namespace Com.MyCompany.MyGame
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
         public static GameManager gm;
-        public const int NumberOfSpawnPoints = 5;
         #endregion
 
         #region Photon Callbacks
