@@ -1,56 +1,46 @@
-﻿using Photon.Pun;
-using Photon.Pun.Demo.PunBasics;
-using System;
+﻿using System;
+using Photon.Pun;
 using UnityEngine;
 using VRTK;
+using VRTK.Examples.Archery;
 
-public class PlayerManager : MonoBehaviourPunCallbacks//, IPunObservable
+public class PlayerManager : MonoBehaviourPunCallbacks
 {
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
-    
 
-//     void Start()
-//     {
-//         CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
-//         Debug.Log("PM start");
-//
-//         if (_cameraWork != null)
-//         {
-//             if (photonView.IsMine)
-//             {
-//                 Debug.Log("Started following the player");
-//                 _cameraWork.OnStartFollowing();
-//             }
-//             else
-//             {
-//                 Debug.Log("Not my camera");
-//             }
-//         }
-//         else
-//         {
-//             Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
-//         }
-// #if UNITY_5_4_OR_NEWER
-//         // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
-//         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
-// #endif
-//     }
+    private void AttachVRTK()
+    {
+        GameObject cameraRig = GameObject.Find("[VRSimulator_CameraRig]");
+        GameObject vrtkScripts = GameObject.Find("[VRTK_Scripts]");
+        VRTK_BodyPhysics bodyPhysics = vrtkScripts.GetComponent<VRTK_BodyPhysics>();
+        
+        bodyPhysics.customPlayAreaRigidbody = gameObject.GetComponent<Rigidbody>();
+        bodyPhysics.customBodyColliderContainer = GameObject.Find("BodyColider");
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        
+        VRTK_TransformFollow follow = gameObject.AddComponent<VRTK_TransformFollow>();
+        cameraRig.transform.position = transform.position;
+        cameraRig.transform.rotation = transform.rotation;
+        
+        // TODO: fix jitter 
+        follow.gameObjectToFollow = cameraRig;
+        follow.gameObjectToChange = gameObject;
+        follow.followsPosition = true;
+        follow.followsRotation = true;
+        follow.smoothsPosition = true;
+        follow.maxAllowedPerFrameDistanceDifference = Single.Epsilon;
+        follow.moment = VRTK_TransformFollow.FollowMoment.OnUpdate;
+
+        transform.Find("Cube").GetComponent<Renderer>().enabled = false;
+    }
+    
 
     void Start()
     {
         if (photonView.IsMine)
         {
-            CameraWork cameraWork = gameObject.GetComponentInChildren<CameraWork>();
-            cameraWork.OnStartFollowing();
-            var vrtkInputSimulator = transform.GetChild(0).GetComponent(typeof(SDK_InputSimulator)) as SDK_InputSimulator;
-            if (vrtkInputSimulator == null)
-                Debug.LogError("No SDK_InputSimulator found on player");
-            else
-            {
-                Debug.Log("Enabling SDK_InputSimulator");
-                vrtkInputSimulator.enabled = true;
-            }
+            AttachVRTK();
         } 
         else 
             Debug.Log("Not my camera"); 
@@ -102,20 +92,4 @@ public class PlayerManager : MonoBehaviourPunCallbacks//, IPunObservable
         CalledOnLevelWasLoaded(scene.buildIndex);
     }
 #endif
-
-    /*#region IPunObservable implementation
-     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-     {
-         if (stream.IsWriting)
-         {
-             // We own this player: send the others our data
-             stream.SendNext(IsFiring);
-         }
-         else
-         {
-             // Network player, receive data
-             this.IsFiring = (bool)stream.ReceiveNext();
-         }
-     }
-     #endregion*/
 }
