@@ -4,12 +4,11 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     public TMP_InputField inputField;
-    private string nickname = "";
 
     public void SetName()
     {
-        nickname = inputField.text;
-        Debug.LogFormat($"Nickname is {nickname}");
+        PlayerPrefs.SetString("name", inputField.text);
+        Debug.LogFormat($"Nickname is {inputField.text}");
     }
 
     public void QuitGame()

@@ -1,8 +1,7 @@
-﻿using System;
 using Photon.Pun;
+using System;
 using UnityEngine;
 using VRTK;
-using VRTK.Examples.Archery;
 
 public class PlayerManager : MonoBehaviourPunCallbacks
 {
@@ -14,15 +13,15 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         GameObject cameraRig = GameObject.Find("[VRSimulator_CameraRig]");
         GameObject vrtkScripts = GameObject.Find("[VRTK_Scripts]");
         VRTK_BodyPhysics bodyPhysics = vrtkScripts.GetComponent<VRTK_BodyPhysics>();
-        
+
         bodyPhysics.customPlayAreaRigidbody = gameObject.GetComponent<Rigidbody>();
         bodyPhysics.customBodyColliderContainer = GameObject.Find("BodyColider");
         gameObject.GetComponent<BoxCollider>().enabled = false;
-        
+
         VRTK_TransformFollow follow = gameObject.AddComponent<VRTK_TransformFollow>();
         cameraRig.transform.position = transform.position;
         cameraRig.transform.rotation = transform.rotation;
-        
+
         // TODO: fix jitter 
         follow.gameObjectToFollow = cameraRig;
         follow.gameObjectToChange = gameObject;
@@ -34,17 +33,30 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
         transform.Find("Cube").GetComponent<Renderer>().enabled = false;
     }
-    
+
+    [Tooltip("The Player's UI GameObject Prefab")]
+    public GameObject PlayerUiPrefab;
 
     void Start()
     {
+        if (PlayerUiPrefab != null)
+        {
+            GameObject _uiGo = Instantiate(PlayerUiPrefab);
+            _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+        }
+        else
+        {
+            Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
+        }
+
         if (photonView.IsMine)
         {
             AttachVRTK();
-        } 
-        else 
-            Debug.Log("Not my camera"); 
-            
+        }
+        else
+        {
+            Debug.Log("Not my camera");
+        }
     }
 
     void Awake()
@@ -79,6 +91,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     void CalledOnLevelWasLoaded(int level)
     {
+        GameObject _uiGo = Instantiate(PlayerUiPrefab);
+        _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
         // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
         if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
         {
