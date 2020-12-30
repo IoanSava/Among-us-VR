@@ -1,5 +1,7 @@
-﻿using Photon.Pun;
+﻿using System;
+using Photon.Pun;
 using UnityEngine;
+using VRTK;
 using VRTK.Examples.Archery;
 
 public class PlayerManager : MonoBehaviourPunCallbacks
@@ -9,20 +11,30 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     private void AttachVRTK()
     {
-        Vector3 currentPosition = transform.position;
         GameObject cameraRig = GameObject.Find("[VRSimulator_CameraRig]");
-        cameraRig.transform.position = currentPosition;
-
-        var boxCollider = gameObject.GetComponent<BoxCollider>();
-        var newBoxCollider = cameraRig.AddComponent<BoxCollider>();
-        newBoxCollider.center = boxCollider.center;
-        newBoxCollider.size = boxCollider.size;
-        Destroy(boxCollider);
+        GameObject vrtkScripts = GameObject.Find("[VRTK_Scripts]");
+        VRTK_BodyPhysics bodyPhysics = vrtkScripts.GetComponent<VRTK_BodyPhysics>();
         
-        var followComponent = gameObject.GetComponent<Follow>();
-        followComponent.enabled = true;
-        followComponent.target = cameraRig.transform;
+        bodyPhysics.customPlayAreaRigidbody = gameObject.GetComponent<Rigidbody>();
+        bodyPhysics.customBodyColliderContainer = GameObject.Find("BodyColider");
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        
+        VRTK_TransformFollow follow = gameObject.AddComponent<VRTK_TransformFollow>();
+        cameraRig.transform.position = transform.position;
+        cameraRig.transform.rotation = transform.rotation;
+        
+        // TODO: fix jitter 
+        follow.gameObjectToFollow = cameraRig;
+        follow.gameObjectToChange = gameObject;
+        follow.followsPosition = true;
+        follow.followsRotation = true;
+        follow.smoothsPosition = true;
+        follow.maxAllowedPerFrameDistanceDifference = Single.Epsilon;
+        follow.moment = VRTK_TransformFollow.FollowMoment.OnUpdate;
+
+        transform.Find("Cube").GetComponent<Renderer>().enabled = false;
     }
+    
 
     void Start()
     {

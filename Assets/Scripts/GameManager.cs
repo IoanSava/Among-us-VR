@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
 
@@ -34,7 +35,8 @@ namespace Com.MyCompany.MyGame
         private Transform GetSpawnPoint()
         {
             System.Random random = new System.Random();
-            return GameController.instance.spawnPoints[random.Next(NumberOfSpawnPoints)];
+            int randomNumber = Random.Range(0, GameController.instance.spawnPoints.Length);
+            return GameController.instance.spawnPoints[randomNumber];
         }
 
         public void Start()
