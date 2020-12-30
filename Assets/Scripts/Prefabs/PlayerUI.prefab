@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 20375143656472330}
-  screenOffset: {x: 0, y: 30, z: 0}
+  screenOffset: {x: 0, y: 75, z: 0}
 --- !u!222 &7444782314048700236
 CanvasRenderer:
   m_ObjectHideFlags: 0
