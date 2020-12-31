@@ -36,6 +36,12 @@ namespace Com.MyCompany.MyGame
             return GameController.instance.spawnPoints[randomNumber];
         }
 
+        private Material GetPlayerColor()
+        {
+            int randomNumber = Random.Range(0, GameController.instance.playerColors.Length);
+            return GameController.instance.playerColors[randomNumber];
+        }
+
         public void Start()
         {
             if (playerPrefab == null)
@@ -48,6 +54,7 @@ namespace Com.MyCompany.MyGame
                 {
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     Transform spawnPoint = GetSpawnPoint();
+                    playerPrefab.transform.GetChild(1).gameObject.GetComponent<Renderer>().material = GetPlayerColor();
                     PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, Quaternion.identity, 0);
                 }
                 else

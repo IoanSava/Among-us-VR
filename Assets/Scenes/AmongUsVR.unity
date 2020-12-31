@@ -1014,6 +1014,12 @@ MonoBehaviour:
   - {fileID: 1398402441}
   - {fileID: 1977577666}
   - {fileID: 1765048858}
+  playerColors:
+  - {fileID: 2100000, guid: 15329632e6c63f74e88577d743ea1a36, type: 2}
+  - {fileID: 2100000, guid: 4b708773cf0db1f4b812838116bbb7ba, type: 2}
+  - {fileID: 2100000, guid: ca1e605df52226b4eacecc9229b5ac3f, type: 2}
+  - {fileID: 2100000, guid: 8ada972b17850d147ac4b050890fc836, type: 2}
+  - {fileID: 2100000, guid: 0ee23a596317e684d8d1fd516631c4c0, type: 2}
 --- !u!1 &853365149
 GameObject:
   m_ObjectHideFlags: 0
