@@ -12,7 +12,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     private byte maxPlayersPerRoom = 5;
     private bool isConnectedMaster = false;
     private bool isConnecting;
-    private int roomId = 1;
 
     void Awake()
     {
@@ -78,10 +77,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         if (isConnectedMaster)
         {
-            PhotonNetwork.CreateRoom(roomId.ToString(), new RoomOptions { MaxPlayers = maxPlayersPerRoom });
-            Debug.Log($"Room with id {roomId} created");
+            PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
             //PhotonVoiceNetwork.Instance.Client.OpChangeGroups(new byte[0], BitConverter.GetBytes(roomId));
-            ++roomId;
         }
         else
         {

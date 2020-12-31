@@ -14,15 +14,22 @@ public class PlayerAnimatorManager : MonoBehaviourPun
     {
         if (photonView.IsMine == true && PhotonNetwork.IsConnected == true)
         {
-            float x = Input.GetAxis("Horizontal");
-            float y = Input.GetAxis("Vertical");
-            if (x != 0 || y != 0)
+            if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("isDead"))
             {
-                Animator.SetBool("isMoving", true);
+                Animator.SetBool("isDead", true);
             }
             else
             {
-                Animator.SetBool("isMoving", false);
+                float x = Input.GetAxis("Horizontal");
+                float y = Input.GetAxis("Vertical");
+                if (x != 0 || y != 0)
+                {
+                    Animator.SetBool("isMoving", true);
+                }
+                else
+                {
+                    Animator.SetBool("isMoving", false);
+                }
             }
         }
     }

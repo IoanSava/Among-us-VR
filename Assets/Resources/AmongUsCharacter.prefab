@@ -513,6 +513,7 @@ GameObject:
   - component: {fileID: 919132149351223937}
   - component: {fileID: 8226538786271949574}
   - component: {fileID: 3134779395957941551}
+  - component: {fileID: 1329431992437711202}
   m_Layer: 0
   m_Name: AmongUsCharacter
   m_TagString: Untagged
@@ -671,6 +672,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 4, z: 2}
   m_Center: {x: 0, y: 0.72, z: 0}
+--- !u!114 &1329431992437711202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8754810619037328909}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d5d643079550f4c8e7c25b82e339be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8819278330461595930
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +764,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 705700715551622967, guid: b873b81dc7b941a4bb6c5216c918b66d, type: 3}
+  - {fileID: 2100000, guid: 8ada972b17850d147ac4b050890fc836, type: 2}
   - {fileID: 2776297941512862300, guid: b873b81dc7b941a4bb6c5216c918b66d, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
