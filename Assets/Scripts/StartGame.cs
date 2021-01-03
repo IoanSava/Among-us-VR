@@ -26,6 +26,7 @@ public class StartGame : MonoBehaviourPun
         if (PhotonNetwork.LocalPlayer.ActorNumber - 1 == impostorIndex)
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable() { { "isImpostor", true } });
+            Debug.Log("You are the impostor");
         }
         else
         {

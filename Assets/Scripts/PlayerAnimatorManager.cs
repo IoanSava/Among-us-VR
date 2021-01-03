@@ -1,5 +1,6 @@
 ﻿using Photon.Pun;
 using UnityEngine;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerAnimatorManager : MonoBehaviourPun
 {
@@ -14,21 +15,31 @@ public class PlayerAnimatorManager : MonoBehaviourPun
     {
         if (photonView.IsMine == true && PhotonNetwork.IsConnected == true)
         {
-            if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("isDead"))
+            if (!Animator.GetBool("isDead"))
             {
-                Animator.SetBool("isDead", true);
-            }
-            else
-            {
-                float x = Input.GetAxis("Horizontal");
-                float y = Input.GetAxis("Vertical");
-                if (x != 0 || y != 0)
+                if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("isDead"))
                 {
-                    Animator.SetBool("isMoving", true);
+                    Animator.SetBool("isDead", true);
+                }
+                else
+                if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("isKilling") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["isKilling"])
+                {
+                    PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable() { { "isKilling", false } });
+                    Animator.SetBool("isKilling", true);
                 }
                 else
                 {
-                    Animator.SetBool("isMoving", false);
+                    float x = Input.GetAxis("Horizontal");
+                    float y = Input.GetAxis("Vertical");
+                    if (x != 0 || y != 0)
+                    {
+                        Animator.SetBool("isMoving", true);
+                        Animator.SetBool("isKilling", false);
+                    }
+                    else
+                    {
+                        Animator.SetBool("isMoving", false);
+                    }
                 }
             }
         }
