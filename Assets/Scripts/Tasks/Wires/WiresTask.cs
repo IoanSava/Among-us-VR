@@ -61,6 +61,7 @@ public class WiresTask : MonoBehaviour
             if (connectedWires >= _rightWires.Count)
             {
                 Debug.Log("TASK COMPLETED!");
+                transform.root.gameObject.SetActive(false);
             }
             else
             {
