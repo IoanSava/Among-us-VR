@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Wire : MonoBehaviour 
+public class Wire : MonoBehaviour
 {
     public bool IsLeftWire;
     public Color CustomColor;
@@ -41,7 +37,7 @@ public class Wire : MonoBehaviour
             OnEndDrag();
         }
 
-        if(_isDragStarted)
+        if (_isDragStarted)
         {
             Vector2 movePos;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
