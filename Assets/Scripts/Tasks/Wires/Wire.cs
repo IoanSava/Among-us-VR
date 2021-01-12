@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Wire : MonoBehaviour,  IDragHandler, IBeginDragHandler, IEndDragHandler
+public class Wire : MonoBehaviour 
 {
     public bool IsLeftWire;
     public Color CustomColor;
@@ -33,15 +33,14 @@ public class Wire : MonoBehaviour,  IDragHandler, IBeginDragHandler, IEndDragHan
         CustomColor = color;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonUp(0) && _isDragStarted)
+        {
+            OnEndDrag();
+        }
+
         if(_isDragStarted)
         {
             Vector2 movePos;
@@ -75,22 +74,7 @@ public class Wire : MonoBehaviour,  IDragHandler, IBeginDragHandler, IEndDragHan
         }
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        // needed for drag but not used
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        if (!IsLeftWire) { return; }
-        // If it is connected, do not draw more lines
-        if (IsConnected) { return; }
-
-        _isDragStarted = true;
-        _wiresTask.CurrentDraggedWire = this;
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnEndDrag()
     {
         if (_wiresTask.CurrentHoveredWire != null)
         {
@@ -104,5 +88,18 @@ public class Wire : MonoBehaviour,  IDragHandler, IBeginDragHandler, IEndDragHan
 
         _isDragStarted = false;
         _wiresTask.CurrentDraggedWire = null;
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!IsLeftWire) { return; }
+            // If it is connected, do not draw more lines
+            if (IsConnected) { return; }
+
+            _isDragStarted = true;
+            _wiresTask.CurrentDraggedWire = this;
+        }
     }
 }
