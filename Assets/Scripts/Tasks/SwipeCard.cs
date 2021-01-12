@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class SwipeCard : MonoBehaviour, IDragHandler
+public class SwipeCard : MonoBehaviour
 {
     private Canvas _canvas;
 
@@ -10,14 +9,16 @@ public class SwipeCard : MonoBehaviour, IDragHandler
         _canvas = GetComponentInParent<Canvas>();
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public void OnMouseOver()
     {
-        Vector2 pos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                 _canvas.transform as RectTransform,
-                 eventData.position,
-                 _canvas.worldCamera,
-                 out pos);
-        transform.position = _canvas.transform.TransformPoint(pos);
+        if (Input.GetMouseButton(0))
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                     _canvas.transform as RectTransform,
+                     Input.mousePosition,
+                     _canvas.worldCamera,
+                     out Vector2 pos);
+            transform.position = _canvas.transform.TransformPoint(pos);
+        }
     }
 }
