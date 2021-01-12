@@ -32,7 +32,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         follow.moment = VRTK_TransformFollow.FollowMoment.OnUpdate;
 
         transform.Find("Cube").GetComponent<Renderer>().enabled = false;
+
     }
+    
 
     [Tooltip("The Player's UI GameObject Prefab")]
     public GameObject PlayerUiPrefab;
